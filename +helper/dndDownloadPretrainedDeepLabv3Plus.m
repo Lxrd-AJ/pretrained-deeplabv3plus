@@ -6,11 +6,11 @@ function model = dndDownloadPretrainedDeepLabv3Plus(basePath)
 
 dataPath = basePath;
 modelName = 'deepLabV3Plus-voc';
-netFileFullPath = fullfile(dataPath, modelName + '.zip');
-weightsFile = fullfile(dataPath, modelName + '.mat');
+netFileFullPath = fullfile(dataPath, modelName + ".zip");
+weightsFile = fullfile(dataPath, modelName + ".mat");
 
-if ~exist(netFileFull,'file')
-    fprintf('Downloading pretrained '+ modelName +' network.\n');
+if ~exist(netFileFullPath,'file')
+    fprintf("Downloading pretrained " + modelName + " network.\n");
     fprintf('This can take several minutes to download...\n');
     url = 'https://ssd.mathworks.com/supportfiles/vision/deeplearning/models/deepLabV3Plus/deepLabV3Plus-voc.zip';
     websave (netFileFullPath,url);
@@ -25,4 +25,5 @@ else
         model = load(weightsFile);
     end
 end
+model = layerGraph(model.net);
 end
